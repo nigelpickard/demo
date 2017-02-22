@@ -1,0 +1,1 @@
+https://github.com/bhdrkn/Java-Examples/blob/master/spring-hibernate-5/src/main/resources/hibernate-context.xml
