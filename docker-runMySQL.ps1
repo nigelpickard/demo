@@ -40,7 +40,6 @@ docker rm $myDemoSQLName
 #now create directory if it doesn't exist
 $databaseDir = $Env:MYDEMO_PATH + '/mySQLData/' + $mappedPort + '/myDemoDb'
 
-
 if(!(Test-Path -Path $databaseDir )){
     New-Item -ItemType directory -Path $databaseDir
 }
