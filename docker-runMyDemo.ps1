@@ -30,8 +30,6 @@ Write-Host 'Stopping and removing any App container with name of '$myDemoName
 docker stop $myDemoName
 docker rm $myDemoName
 
-Write-Host 'aaaaaaaa'
-
 #we now have the mysql running, now run the demo app
 $cmd = 'docker run --name=' + $myDemoName + ' -e MYDEMO_NAME=' + $demoName + ' -e MYDEMO_HOSTNAME=' + $myDemoHostName + ' -e MYDEMO_DB_PORT=' + $dbMappedPort + ' -e MYDEMO_DB_NAME=' + $dbName + ' --add-host ' + $myDemoHostName + ':' + $ip.ipaddress[0] + ' -p ' +  $demoMappedPort + ':8080 -d -v $Env:MYDEMO_PATH\myDemo\target\myDemo-0.0.1-SNAPSHOT.jar:/docker/myDemo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/myDemo-0.0.1-SNAPSHOT.jar'
 Write-Host $cmd

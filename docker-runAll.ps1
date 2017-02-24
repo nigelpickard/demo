@@ -15,8 +15,8 @@ Write-Host 'Running and create all services -arguments are demoName: '$demoName'
 Write-Host 'MYDEMO_PATH='$Env:MYDEMO_PATH
 
 
-$dbPortNumbersArray = (3306)
-$demoPortNumbersArray = {8080}
+$dbPortNumbersArray = (3306, 3307)
+$demoPortNumbersArray = (8080, 8081)
 
 
 for($i = 0; $i -le $dbPortNumbersArray.count -1; $i++) {
@@ -26,7 +26,7 @@ for($i = 0; $i -le $dbPortNumbersArray.count -1; $i++) {
     Invoke-Expression $cmd
 
     #make sure container is started
-    $cmd = 'Start-Sleep -s 5'
+    $cmd = 'Start-Sleep -s 10'
     Write-Host $cmd
     Invoke-Expression $cmd
 
