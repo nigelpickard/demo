@@ -11,7 +11,8 @@
 
 $demoName = $args[0]
 $mappedPort = $args[1]
-Write-Host 'Arguments are demoName: '$demoName' instance Id: '$instanceId' mapped port: '$mappedPort
+$dbName = 'myDemoDb';
+Write-Host 'Arguments are demoName: '$demoName' instance Id: '$instanceId' mapped port: '$mappedPort' database name: '$dbName
 
 
 Write-Host 'MYDEMO_PATH='$Env:MYDEMO_PATH
@@ -38,7 +39,7 @@ docker rm $myDemoSQLName
 
 
 #now create directory if it doesn't exist
-$databaseDir = $Env:MYDEMO_PATH + '/mySQLData/' + $mappedPort + '/myDemoDb'
+$databaseDir = $Env:MYDEMO_PATH + '/mySQLData/' + $mappedPort + '/' + $dbName
 
 if(!(Test-Path -Path $databaseDir )){
     New-Item -ItemType directory -Path $databaseDir
@@ -50,13 +51,20 @@ Write-Host $cmd
 Invoke-Expression $cmd
 
 
-#now create the database
-#make sure container is started
-$cmd = 'Start-Sleep -s 30'
-Write-Host $cmd
-Invoke-Expression $cmd
+#now create the database if it does not exist
+$databaseDirDb = $databaseDir + '/' + $dbName
+if(!(Test-Path -Path $databaseDirDb )){
+    #make sure container is started
+    $cmd = 'Start-Sleep -s 30'
+    Write-Host $cmd
+    Invoke-Expression $cmd
 
-# create schema
-$cmd = 'cmd /c ''docker exec -i ' + $myDemoSQLName + ' mysql --port 3306 --password=password < createSchema.sql'''
-Write-Host $cmd
-Invoke-Expression $cmd
+    # create schema
+    $cmd = 'cmd /c ''docker exec -i ' + $myDemoSQLName + ' mysql --port 3306 --password=password < createSchema.sql'''
+    Write-Host $cmd
+    Invoke-Expression $cmd
+}
+
+
+
+

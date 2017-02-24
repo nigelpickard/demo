@@ -7,6 +7,9 @@
 #
 #############################################
 
-$cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runMySQL.ps1 myDemo 3310'
-Write-Host $cmd
-Invoke-Expression $cmd
+$NumArray = (3306, 3307, 3308)
+ForEach ($number in $NumArray ) {
+    $cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runMySQL.ps1 myDemo ' + $number
+    Write-Host $cmd
+    Invoke-Expression $cmd
+}
