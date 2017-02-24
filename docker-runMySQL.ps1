@@ -1,21 +1,18 @@
 #############################################
 # This is for local development on Windows
 # RUN USING THE FOLLOWING COMMAND
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 [container name part] [mapped port number]
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 [container name part] [database name] [mapped database port number]
 #
 # e.g.
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 myDemo 1 3306
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 myDemo 3306 myDemoDb
 #
 #
 #############################################
 
 $demoName = $args[0]
-$mappedPort = $args[1]
-$dbName = 'myDemoDb';
-Write-Host 'Arguments are demoName: '$demoName' instance Id: '$instanceId' mapped port: '$mappedPort' database name: '$dbName
-
-
-Write-Host 'MYDEMO_PATH='$Env:MYDEMO_PATH
+$dbName = $args[1]
+$mappedPort = $args[2]
+Write-Host 'MySQL arguments are demoName: '$demoName' database name: '$dbName' mapped demo port: '$mappedPort' database name: '$dbName' mapped database port: '$dbMappedPort
 
 
 #--------------------------------------------------------------------------------------

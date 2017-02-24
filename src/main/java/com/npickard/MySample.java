@@ -30,7 +30,7 @@ public class MySample {
             System.out.println("EntityManager is valid!!!!!!");
 
             Person person = new Person();
-            person.setName("Fred Bloggs");
+            person.setName("Freddie Bloggs");
             person.setCountry("UK");
             personService.add(person);
         }
