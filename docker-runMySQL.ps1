@@ -22,7 +22,6 @@ docker stop $myDemoSQLName
 docker rm $myDemoSQLName
 
 #we now have the mysql running, now run the demo app
-#$cmd = 'docker run --name=' + $myDemoSQLName + ' --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -v c:/Users/npickard/Documents/personal/MyDemo/workspace/myDemoDb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32'
-$cmd = 'docker run --name=' + $myDemoSQLName + ' --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -v c:/Users/npickard/Documents/personal/MyDemo/workspace/myDemoDb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32'
+$cmd = 'docker run --name=' + $myDemoSQLName + ' --add-host local.mydemo.com:' + $ip.ipaddress[0] + ' -v c:/Users/npickard/Documents/personal/MyDemo/workspace/myDemoDb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32'
 Write-Host $cmd
 Invoke-Expression $cmd

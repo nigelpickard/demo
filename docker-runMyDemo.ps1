@@ -24,11 +24,6 @@ docker stop $myDemoName
 docker rm $myDemoName
 
 #we now have the mysql running, now run the demo app
-#$cmd = 'docker run --name=' + $myDemoName + '  --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-#$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-#$cmd = 'docker run  --link myDemo-MySQL:myDemo-MySQL --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-
-#$cmd = 'docker run --name=mainApp --add-host ' + $hostNames + ':' + $ip.ipaddress[0] + ' -p 8080:8080 --env-file=$Env:ZAREX_DOCKER_PATH\docker\local.env -d -v $Env:ZAREX_DOCKER_PATH\main-app\target\main-app-1.0-SNAPSHOT.jar:/docker/main-app-1.0-SNAPSHOT.jar java:8u40 java -jar /docker/main-app-1.0-SNAPSHOT.jar'
-$cmd = 'docker run --name=' + $myDemoName + ' --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
+$cmd = 'docker run --name=' + $myDemoName + ' --add-host local.mydemo.com:' + $ip.ipaddress[0] + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
 Write-Host $cmd
 Invoke-Expression $cmd
