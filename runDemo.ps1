@@ -60,8 +60,8 @@ docker stop $myDemoName
 docker rm $myDemoName
 
 #we now have the mysql running, now run the demo app
-#$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-#$cmd = 'docker run --name=' + $myDemoName + ' --add-host ' + $mappedHostInfo + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar' + ' --link ' + $mySQLName + ':' + $mySQLName
+#$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:MYDEMO_PATH\myDemo\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
+#$cmd = 'docker run --name=' + $myDemoName + ' --add-host ' + $mappedHostInfo + ' -p 8080:8080 -d -v $Env:MYDEMO_PATH\myDemo\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
+$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:MYDEMO_PATH\myDemo\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar' + ' --link ' + $mySQLName + ':' + $mySQLName
 Write-Host $cmd
 Invoke-Expression $cmd
