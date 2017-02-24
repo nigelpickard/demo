@@ -35,10 +35,3 @@ for($i = 0; $i -le $dbPortNumbersArray.count -1; $i++) {
     Invoke-Expression $cmd
 
 }
-
-
-#ForEach ($dbPortNumber in $dbPortNumberArray ) {
-#    $cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runMySQL.ps1 ' + $demoName + ' ' + $dbPortNumber + ' ' + $dbName
-#    Write-Host $cmd
-#    Invoke-Expression $cmd
-#}
