@@ -7,10 +7,22 @@
 #
 #############################################
 
+$demoName = 'myDemo'
 
-## CLEANUP EXISTING CONTAINERS AND DIRECTORY FOR TEMP SETTINGS
-#docker stop myDemoMySQL
-#docker rm myDemoMySQL
+#--------------------------------------------------------------------------------------
+# APP
+#
+$myDemoSQLName = $demoName + '-' + 'MySQL'
+# Obtain the ip address
+$ip=get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
 
-## Start up all containers and an activeMQ container on localhost
-#docker run --name=myDemoMySQL -v c:/Users/npickard/Documents/personal/MyDemo/myDemoMySqlData/myDemo_database:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32
+#first stop and remove any existing SQL containers
+Write-Host 'Stopping and removing any App container with name of '$myDemoName
+docker stop $myDemoSQLName
+docker rm $myDemoSQLName
+
+#we now have the mysql running, now run the demo app
+#$cmd = 'docker run --name=' + $myDemoSQLName + ' --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -v c:/Users/npickard/Documents/personal/MyDemo/workspace/myDemoDb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32'
+$cmd = 'docker run --name=' + $myDemoSQLName + ' --add-host local.omedlive.com:' + $ip.ipaddress[0] + ' -v c:/Users/npickard/Documents/personal/MyDemo/workspace/myDemoDb:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:5.6.32'
+Write-Host $cmd
+Invoke-Expression $cmd

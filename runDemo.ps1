@@ -13,7 +13,7 @@
 $ip=get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
 
 $demoName = 'myDemo'
-$hostPort = '3308'
+$hostPort = '3306'
 $containerPort = '3306'
 $portSetting = $hostPort + ':' + $containerPort
 $mappedHostName = 'local.' + $demoName + '.com'
@@ -39,16 +39,14 @@ Write-Host $cmd
 Invoke-Expression $cmd
 
 #make sure container is started
-$cmd = 'Start-Sleep -s 5'
+$cmd = 'Start-Sleep -s 30'
 Write-Host $cmd
 Invoke-Expression $cmd
-
 
 # create schema
 $cmd = 'cmd /c ''docker exec -i ' + $mySQLName + ' mysql --port 3306 --password=password < createSchema.sql'''
 Write-Host $cmd
 Invoke-Expression $cmd
-
 
 
 #--------------------------------------------------------------------------------------
@@ -62,14 +60,8 @@ docker stop $myDemoName
 docker rm $myDemoName
 
 #we now have the mysql running, now run the demo app
-$cmd = 'docker run --name=' + $myDemoName + ' --add-host ' + $mappedHostInfo + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
-Write-Host $cmd
-Invoke-Expression $cmd
-
-
-#--------------------------------------------------------------------------------------
-# make sure APP uses MYSQL
-#
-$cmd = 'sudo docker run --name ' + $myDemoName + ' --link ' + $mySQLName + ':' + $mySQLName + ' -p 8080:8080 -d tomcat:7-jre8'
+#$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
+#$cmd = 'docker run --name=' + $myDemoName + ' --add-host ' + $mappedHostInfo + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar'
+$cmd = 'docker run --name=' + $myDemoName + ' -p 8080:8080 -d -v $Env:DEMO_HOME\target\demo-0.0.1-SNAPSHOT.jar:/docker/demo-0.0.1-SNAPSHOT.jar java:8u40 java -jar /docker/demo-0.0.1-SNAPSHOT.jar' + ' --link ' + $mySQLName + ':' + $mySQLName
 Write-Host $cmd
 Invoke-Expression $cmd

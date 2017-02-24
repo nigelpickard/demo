@@ -13,33 +13,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		  destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/myDemoDb" />
+		<property name="url" value="jdbc:mysql://local.omedlive.com:3306/myDemoDb" />
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>
-
-	<!--&lt;!&ndash;org.hibernate.SessionFactory&ndash;&gt;-->
-	<!--&lt;!&ndash; Hibernate 3 Annotation SessionFactory Bean definition&ndash;&gt;-->
-	<!--<bean id="sessionFactory"-->
-		  <!--class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
-		<!--<property name="dataSource" ref="dataSource" />-->
-		<!--<property name="annotatedClasses" ref="hibernateClasses" />-->
-		<!--<property name="hibernateProperties">-->
-			<!--<props>-->
-				<!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>-->
-				<!--<prop key="hibernate.show_sql">true</prop>-->
-				<!--<prop key="hibernate.format_sql">true</prop>-->
-				<!--<prop key="hibernate.generate_statistics">false</prop>-->
-				<!--<prop key="hibernate.hbm2ddl.auto">true</prop>-->
-			<!--</props>-->
-		<!--</property>-->
-	<!--</bean>-->
-
-	<!--<bean id="transactionManager"-->
-		  <!--class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
-		<!--<property name="sessionFactory" ref="sessionFactory" />-->
-	<!--</bean>-->
-
 
 	<bean id="entityManagerFactory"
 		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
