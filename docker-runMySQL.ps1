@@ -33,7 +33,7 @@ $myDemoHostName = 'local.' + $demoName + '.com'
 
 
 #first stop and remove any existing SQL containers
-Write-Host 'Stopping and removing any App container with name of '$myDemoName
+Write-Host 'Stopping and removing any MySQL container with name of '$myDemoSQLName
 docker stop $myDemoSQLName
 docker rm $myDemoSQLName
 

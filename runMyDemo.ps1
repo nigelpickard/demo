@@ -7,9 +7,11 @@
 #
 #############################################
 
-$NumArray = (3306, 3307, 3308)
-ForEach ($number in $NumArray ) {
-    $cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runMySQL.ps1 myDemo ' + $number
+$myDemoName = 'myDemo'
+
+$portNumberArray = (3306, 3307, 3308)
+ForEach ($portNumber in $portNumberArray ) {
+    $cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runMySQL.ps1 ' + $myDemoName + ' ' + $portNumber
     Write-Host $cmd
     Invoke-Expression $cmd
 }
