@@ -11,12 +11,10 @@ public class Person {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     private String name;
-
-    private String country;
 
     public int getId() {
         return id;
@@ -34,16 +32,8 @@ public class Person {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     @Override
     public String toString(){
-        return "id="+id+", name="+name+", country="+country;
+        return "id=" + id + ", name=" + name;
     }
 }

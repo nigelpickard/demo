@@ -15,8 +15,8 @@ Write-Host 'Running and create all services -arguments are demoName: '$demoName'
 Write-Host 'MYDEMO_PATH='$Env:MYDEMO_PATH
 
 
-$dbPortNumbersArray = (3306, 3307)
-$demoPortNumbersArray = (8080, 8081)
+$dbPortNumbersArray = (3306)
+$demoPortNumbersArray = (8080)
 
 
 for($i = 0; $i -le $dbPortNumbersArray.count -1; $i++) {

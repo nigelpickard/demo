@@ -4,7 +4,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="mySample" class="com.npickard.MySample">
+	<bean id="mySample" class="com.npickard.PersonBuilder">
 	</bean>
 
 	<bean id="personService" class="com.npickard.service.PersonService">
@@ -14,6 +14,7 @@
 		  destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://${MYDEMO_HOSTNAME}:${MYDEMO_DB_PORT}/${MYDEMO_DB_NAME}" />
+		<!--<property name="url" value="jdbc:mysql://local.mydemo.com:3306/myDemoDb" />-->
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>

@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
  * Created by npickard on 2/22/2017.
  */
 @Component
-public class MySample {
+public class PersonBuilder {
 
     @Autowired
     EntityManager entityManager;
@@ -20,18 +20,14 @@ public class MySample {
     @Autowired
     PersonService personService;
 
-    public MySample(){}
+    public PersonBuilder(){}
 
-    public void doThis(){
+    public void createPerson(Person person){
         System.out.println("Do this in sample");
         if (entityManager==null){
             System.out.println("EntityManager is null");
         } else {
             System.out.println("EntityManager is valid!!!!!!");
-
-            Person person = new Person();
-            person.setName("Freddie Bloggs");
-            person.setCountry("UK");
             personService.add(person);
         }
     }

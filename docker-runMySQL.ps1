@@ -12,7 +12,7 @@
 $demoName = $args[0]
 $dbName = $args[1]
 $mappedPort = $args[2]
-Write-Host 'MySQL arguments are demoName: '$demoName' database name: '$dbName' mapped demo port: '$mappedPort' database name: '$dbName' mapped database port: '$dbMappedPort
+Write-Host 'MySQL arguments are demoName: '$demoName' database name: '$dbName' mapped database port: '$mappedPort
 
 
 #--------------------------------------------------------------------------------------
