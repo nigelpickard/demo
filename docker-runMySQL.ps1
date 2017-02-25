@@ -4,7 +4,7 @@
 # powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 [container name part] [database name] [mapped database port number]
 #
 # e.g.
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 myDemo 3306 myDemoDb
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runMySQL.ps1 myDemo myDemoDb 3306
 #
 #
 #############################################
