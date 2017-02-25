@@ -1,10 +1,10 @@
 #############################################
 # This is for local development on Windows
 # RUN USING THE FOLLOWING COMMAND
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runAllMyDemo.ps1 [container name part] [database name]
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runAll.ps1 [container name part] [database name]
 #
 # e.g.
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runAllMyDemo.ps1 myDemo myDemoDb
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runAll.ps1 myDemo myDemoDb
 #
 #
 #############################################
