@@ -1,5 +1,7 @@
 package com.npickard;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,9 +22,9 @@ import java.util.Arrays;
 @SpringBootApplication
 @ImportResource( {"classpath:application-config.xml"} )
 public class MyDemoApplication {
+	private static final Log log = LogFactory.getLog(MyDemoApplication.class);
 
 	public static void main(String[] args) {
-		//SpringApplication.run(MyDemoApplication.class, args);
 		ConfigurableApplicationContext context = SpringApplication.run(MyDemoApplication.class, args);
 	}
 
@@ -30,9 +32,7 @@ public class MyDemoApplication {
 	public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory,
 													DefaultJmsListenerContainerFactoryConfigurer configurer) {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-		// This provides all boot's default to this factory, including the message converter
 		configurer.configure(factory, connectionFactory);
-		// You could still override some of Boot's default if necessary.
 		return factory;
 	}
 
@@ -47,13 +47,12 @@ public class MyDemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-
-			System.out.println("Let's inspect the beans provided by Spring Boot:");
+			log.info("Let's inspect the beans provided by Spring Boot:");
 
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			for (String beanName : beanNames) {
-				System.out.println(beanName);
+				log.info(beanName);
 			}
 
 		};

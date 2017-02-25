@@ -60,13 +60,4 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
 
-	<!--<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
-		<!--<property name="connectionFactory" ref="connectionFactory" />-->
-		<!--<property name="receiveTimeout" value="10000" />-->
-	<!--</bean>-->
-
-	<!--<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
-		<!--<property name="brokerURL" value="tcp://localhost:61616" />-->
-	<!--</bean>-->
-
 </beans>

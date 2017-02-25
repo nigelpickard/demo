@@ -30,7 +30,6 @@ public class PersonBuilder implements ApplicationContextAware {
     @Autowired
     PersonService personService;
 
-    //@Autowired
     JmsTemplate jmsTemplate;
 
     public PersonBuilder(){}
@@ -46,7 +45,7 @@ public class PersonBuilder implements ApplicationContextAware {
             log.warn("Person to create is null!");
         }
 
-        log.info("Creating person(" + person.toString() + ") with persistence mode: " + messagePersistenceMode);
+        //log.info("Creating person(" + person.toString() + ") with persistence mode: " + messagePersistenceMode);
 
         if (MessagePersistenceMode.MESSAGE.equals(messagePersistenceMode)){
             if (isJMS) {
