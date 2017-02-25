@@ -13,6 +13,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by npickard on 2/22/2017.
@@ -21,6 +22,7 @@ import javax.persistence.EntityManager;
 public class PersonBuilder implements ApplicationContextAware {
     private static final Log log = LogFactory.getLog(PersonBuilder.class);
     private ApplicationContext applicationContext;
+    private boolean isJMS = true;
 
     @Autowired
     EntityManager entityManager;
@@ -47,8 +49,13 @@ public class PersonBuilder implements ApplicationContextAware {
         log.info("Creating person(" + person.toString() + ") with persistence mode: " + messagePersistenceMode);
 
         if (MessagePersistenceMode.MESSAGE.equals(messagePersistenceMode)){
-            log.info("Sending person message: " + person.toString());
-            jmsTemplate.convertAndSend("mailbox", person);
+            if (isJMS) {
+                log.info("Sending person message: " + person.toString());
+                jmsTemplate.convertAndSend("mailbox", person);
+            }else {
+                log.info("JMS not on; setting person to just persist");
+                messagePersistenceMode = MessagePersistenceMode.PERSIST;
+            }
         }
 
         if (MessagePersistenceMode.PERSIST.equals(messagePersistenceMode)){
@@ -57,8 +64,16 @@ public class PersonBuilder implements ApplicationContextAware {
         }
     }
 
+    public List<Person> getAllPersons(){
+        return personService.listAll();
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    public void isJMS(boolean val){
+        isJMS = val;
     }
 }

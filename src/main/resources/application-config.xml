@@ -4,7 +4,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="mySample" class="com.npickard.PersonBuilder">
+	<bean id="personBuilder" class="com.npickard.PersonBuilder">
 	</bean>
 
 	<bean id="personService" class="com.npickard.service.PersonService">

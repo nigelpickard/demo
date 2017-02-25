@@ -1,7 +1,5 @@
 package com.npickard;
 
-import com.npickard.model.Person;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
@@ -22,11 +19,11 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @ImportResource( {"classpath:application-config.xml"} )
-public class DemoApplication {
+public class MyDemoApplication {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(DemoApplication.class, args);
-		ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+		//SpringApplication.run(MyDemoApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(MyDemoApplication.class, args);
 	}
 
 	@Bean
