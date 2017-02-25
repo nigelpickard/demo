@@ -15,6 +15,13 @@ Write-Host 'Running and create all services -arguments are demoName: '$demoName'
 Write-Host 'MYDEMO_PATH='$Env:MYDEMO_PATH
 
 
+#get active mq up and running
+$cmd = $Env:MYDEMO_PATH + '\myDemo\docker-runActiveMQ.ps1 ' + $demoName
+Write-Host $cmd
+Invoke-Expression $cmd
+
+
+
 $dbPortNumbersArray = (3306, 3307)
 $demoPortNumbersArray = (8080, 8081)
 

@@ -19,9 +19,17 @@ Write-Host 'ActiveMQ arguments are demoName: '$demoName
 # Obtain the ip address
 $ip=get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
 
+#get the name used for the container
+$myDemoActiveMQName = $demoName + '-' + 'ActiveMQ' + '-' + '61616'
+
+#first stop and remove any existing SQL containers
+Write-Host 'Stopping and removing any MySQL container with name of '$myDemoSQLName
+docker stop $myDemoActiveMQName
+docker rm $myDemoActiveMQName
+
 #get the host name used
 $myDemoHostName = 'local.' + $demoName + '.com'
 
-$cmd = 'docker run --name=zarexMQ --add-host ' + $myDemoHostName + ':' + $ip.ipaddress[0] + ' -p 8161:8161 -p 61616:61616 -p 61613:61613 -p 61617:61617 -d granthbr/docker-activemq-oraclejava-7'
+$cmd = 'docker run --name=' + $myDemoActiveMQName + ' --add-host ' + $myDemoHostName + ':' + $ip.ipaddress[0] + ' -p 8161:8161 -p 61616:61616 -p 61613:61613 -p 61617:61617 -d granthbr/docker-activemq-oraclejava-7'
 Write-Host $cmd
 Invoke-Expression $cmd

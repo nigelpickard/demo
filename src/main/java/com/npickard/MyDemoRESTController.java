@@ -29,7 +29,7 @@ public class MyDemoRESTController {
         log.info("about to create a person called " + personName);
         Person person = new Person(personName);
         personBuilder.createPerson(messagePersistenceMode, person);
-        return ("Person saved is " + person.getName());
+        return ("Person saved is " + person.toString());
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
