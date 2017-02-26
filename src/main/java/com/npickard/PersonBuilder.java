@@ -36,7 +36,6 @@ public class PersonBuilder implements ApplicationContextAware {
 
     public void createPerson(MessagePersistenceMode messagePersistenceMode, Person person){
 
-        jmsTemplate = applicationContext.getBean(JmsTemplate.class);
         if (messagePersistenceMode == null){
             log.warn("Message Persistence Mode is null; no operation done.");
         }
@@ -45,7 +44,7 @@ public class PersonBuilder implements ApplicationContextAware {
             log.warn("Person to create is null!");
         }
 
-        //log.info("Creating person(" + person.toString() + ") with persistence mode: " + messagePersistenceMode);
+        jmsTemplate = applicationContext.getBean(JmsTemplate.class);
 
         if (MessagePersistenceMode.MESSAGE.equals(messagePersistenceMode)){
             if (isJMS) {

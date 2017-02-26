@@ -1,6 +1,0 @@
-MYDEMO_NAME  e.g. mydemo
-MYDEMO_DB_PORT  e.g. 3306
-MYDEMO_DB_NAME e.g. myDemoDb
-
-
-https://github.com/bhdrkn/Java-Examples/blob/master/spring-hibernate-5/src/main/resources/hibernate-context.xml

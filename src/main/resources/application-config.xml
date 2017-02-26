@@ -4,10 +4,10 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="personBuilder" class="com.npickard.PersonBuilder">
+	<bean id="personBuilder" class="com.npickard.FlattenedPersonBuilder">
 	</bean>
 
-	<bean id="personService" class="com.npickard.service.PersonService">
+	<bean id="personService" class="com.npickard.service.FlattenedPersonService">
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
