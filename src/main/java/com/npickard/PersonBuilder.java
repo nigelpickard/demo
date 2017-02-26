@@ -25,12 +25,12 @@ public class PersonBuilder implements ApplicationContextAware {
     private boolean isJMS = true;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
-    PersonService personService;
+    private PersonService personService;
 
-    JmsTemplate jmsTemplate;
+    private JmsTemplate jmsTemplate;
 
     public PersonBuilder(){}
 

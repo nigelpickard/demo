@@ -1,15 +1,16 @@
 #############################################
 # This is for local development on Windows
 # RUN USING THE FOLLOWING COMMAND
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runActiveMQ.ps1 [container name]
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runActiveMQ.ps1 [container name] [stop]
 #
 # e.g.
-# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runActiveMQ.ps1 myDemo
+# powershell -executionpolicy remotesigned -File %MYDEMO_PATH%\myDemo\docker-runActiveMQ.ps1 myDemo stop
 #
 #
 #############################################
 
 $demoName = $args[0]
+$stop = $args[1]
 Write-Host 'ActiveMQ arguments are demoName: '$demoName
 
 #--------------------------------------------------------------------------------------
@@ -30,6 +31,9 @@ docker rm $myDemoActiveMQName
 #get the host name used
 $myDemoHostName = 'local.' + $demoName + '.com'
 
-$cmd = 'docker run --name=' + $myDemoActiveMQName + ' --add-host ' + $myDemoHostName + ':' + $ip.ipaddress[0] + ' -p 8161:8161 -p 61616:61616 -p 61613:61613 -p 61617:61617 -d granthbr/docker-activemq-oraclejava-7'
-Write-Host $cmd
-Invoke-Expression $cmd
+if("stop" -ne $stop){
+    #need to be removed
+    #$cmd = 'docker run --name=' + $myDemoActiveMQName + ' --add-host ' + $myDemoHostName + ':' + $ip.ipaddress[0] + ' -p 8161:8161 -p 61616:61616 -p 61613:61613 -p 61617:61617 -d granthbr/docker-activemq-oraclejava-7'
+    #Write-Host $cmd
+    #Invoke-Expression $cmd
+}
