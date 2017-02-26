@@ -14,7 +14,7 @@
 		  destroy-method="close">
 		<!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
 		<property name="url" value="jdbc:mysql://${MYDEMO_HOSTNAME}:${MYDEMO_DB_PORT}/${MYDEMO_DB_NAME}" />
-		<!--<property name="url" value="jdbc:mysql://local.mydemo.com:3306/myDemoDb" />-->
+		<!--<property name="url" value="jdbc:mysql://local.mydemo.com:3307/myDemoDb" />-->
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>
@@ -57,6 +57,63 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+
+	<!-- =============================================== -->
+	<!-- JMS Common, Define JMS connectionFactory       -->
+	<!-- =============================================== -->
+	<!-- Activemq connection factory -->
+	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- brokerURL, You may have different IP or port -->
+		<constructor-arg index="0" value="tcp://local.mydemo.com:61616" />
+	</bean>
+
+	<!-- Pooled Spring connection factory -->
+	<bean id="connectionFactory"
+		  class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="amqConnectionFactory" />
+	</bean>
+
+	<!-- ======================================================= -->
+	<!-- JMS Send, define default destination and JmsTemplate    -->
+	<!-- ======================================================= -->
+	<!-- Default Destination Queue Definition -->
+	<bean id="defaultDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- name of the queue -->
+		<constructor-arg index="0" value="MyDemoQueue" />
+	</bean>
+
+	<!-- JmsTemplate Definition -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="defaultDestination" />
+	</bean>
+
+
+	<!-- ============================================================= -->
+	<!-- JMS Receive，Define MessageListenerContainer                  -->
+	<!-- ============================================================= -->
+	<!--<bean id = "messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
+	<!--<property name="connectionFactory" ref="connectionFactory"/>-->
+	<!--<property name="destinationName" value="Send2Recv"/>-->
+	<!--<property name="messageListener" ref="jmsMessageListener"/>-->
+	<!--</bean>-->
+
+	<!-- ============================================================= -->
+	<!-- JMS receive.                                                  -->
+	<!-- Define MessageListenerAdapter and MessageListenerContainer    -->
+	<!-- ============================================================= -->
+	<bean id="messageListenerAdapter"
+		  class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg ref="jmsMessageListener" />
+	</bean>
+
+	<bean id="messageListenerContainer"
+		  class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="MyDemoQueue" />
+		<property name="messageListener" ref="messageListenerAdapter" />
 	</bean>
 
 </beans>

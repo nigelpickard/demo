@@ -49,7 +49,11 @@ public class PersonBuilder implements ApplicationContextAware {
         if (MessagePersistenceMode.MESSAGE.equals(messagePersistenceMode)){
             if (isJMS) {
                 log.info("Sending person message: " + person.toString());
-                jmsTemplate.convertAndSend("mailbox", person);
+                JmsMessageSender jmsMessageSender = (JmsMessageSender)applicationContext.getBean("jmsMessageSender");
+                // send to default destination
+                jmsMessageSender.send(person.getName());
+//            // send to a code specified destination
+//            Queue queue = new ActiveMQQueue("AnotherDest");
             }else {
                 log.info("JMS not on; setting person to just persist");
                 messagePersistenceMode = MessagePersistenceMode.PERSIST;
