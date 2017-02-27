@@ -41,7 +41,7 @@ public class MyDemoRESTController {
         for (Person person : persons){
             sb.append(person.toString() + "<br>");
         }
-        return ("Persons persisted in database are " + sb.toString());
+        return ("Application Service: Persons persisted in database are " + sb.toString());
     }
     @RequestMapping(value = "/mq", method = RequestMethod.GET)
     public String createPersonByRequestParam(@RequestParam("on") boolean isOn) {
