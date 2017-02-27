@@ -26,29 +26,3 @@ public class JmsMessageListener {
         return "ACK from handleMessage";
     }
 }
-
-//@Service
-///**
-// * Listener Implement Spring SessionAwareMessageListener Interface
-// */
-//public class JmsMessageListener implements SessionAwareMessageListener<TextMessage> {
-//    private static final Log log = LogFactory.getLog(JmsMessageListener.class);
-//
-//
-//    @Override
-//    public void onMessage(TextMessage message, Session session) throws JMSException {
-//        // This is the received message
-//        log.info("Receive: " + message.getText());
-//
-//        // Let's prepare a reply message - a "ACK" String
-//        ActiveMQTextMessage textMessage = new ActiveMQTextMessage();
-//        log.info("Got JMS message: " + message);
-//        textMessage.setText("ACK");
-//
-//        // Message send back to the replyTo address of the income message.
-//        // Like replying an email somehow.
-//        MessageProducer producer = session.createProducer(message.getJMSReplyTo());
-//        producer.send(textMessage);
-//    }
-//
-//}
