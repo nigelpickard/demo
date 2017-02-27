@@ -15,13 +15,13 @@ public class Receiver {
     private static final Log log = LogFactory.getLog(Receiver.class);
     private static final MessagePersistenceMode messagePersistenceMode = MessagePersistenceMode.PERSIST;
 
-    @Autowired
-    PersonBuilder personBuilder;
-
-    @JmsListener(destination = "mailbox", containerFactory = "myFactory")
-    public void receiveMessage(Person person) {
-        log.info("Received <" + person.toString() + ">");
-        personBuilder.createPerson(messagePersistenceMode, person);
-    }
+//    @Autowired
+//    PersonBuilder personBuilder;
+//
+//    @JmsListener(destination = "mailbox", containerFactory = "myFactory")
+//    public void receiveMessage(Person person) {
+//        log.info("Received <" + person.toString() + ">");
+//        personBuilder.createPerson(messagePersistenceMode, person);
+//    }
 
 }

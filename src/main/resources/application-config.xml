@@ -12,7 +12,6 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		  destroy-method="close">
-		<!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
 		<property name="url" value="jdbc:mysql://${MYDEMO_HOSTNAME}:${MYDEMO_DB_PORT}/${MYDEMO_DB_NAME}" />
 		<!--<property name="url" value="jdbc:mysql://local.mydemo.com:3307/myDemoDb" />-->
 		<property name="username" value="root" />
@@ -78,27 +77,15 @@
 	<!-- ======================================================= -->
 	<!-- JMS Send, define default destination and JmsTemplate    -->
 	<!-- ======================================================= -->
-	<!-- Default Destination Queue Definition -->
-	<bean id="defaultDestination" class="org.apache.activemq.command.ActiveMQQueue">
-		<!-- name of the queue -->
-		<constructor-arg index="0" value="MyDemoQueue" />
+	<bean id="myDemoDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="MyDemoTopic" />
 	</bean>
 
 	<!-- JmsTemplate Definition -->
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="defaultDestination" />
+		<property name="defaultDestination" ref="myDemoDestination" />
 	</bean>
-
-
-	<!-- ============================================================= -->
-	<!-- JMS Receive，Define MessageListenerContainer                  -->
-	<!-- ============================================================= -->
-	<!--<bean id = "messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
-	<!--<property name="connectionFactory" ref="connectionFactory"/>-->
-	<!--<property name="destinationName" value="Send2Recv"/>-->
-	<!--<property name="messageListener" ref="jmsMessageListener"/>-->
-	<!--</bean>-->
 
 	<!-- ============================================================= -->
 	<!-- JMS receive.                                                  -->
@@ -112,8 +99,9 @@
 	<bean id="messageListenerContainer"
 		  class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destinationName" value="MyDemoQueue" />
+		<property name="destinationName" value="MyDemoTopic" />
 		<property name="messageListener" ref="messageListenerAdapter" />
+		<property name="pubSubDomain" value="true" />
 	</bean>
 
 </beans>
